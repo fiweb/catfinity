@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affinity Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        function calculateAffinity() {
+            let user1 = document.getElementById("user1").value;
+            let user2 = document.getElementById("user2").value;
+
+            if (user1 === "" || user2 === "") {
+                document.getElementById("result").innerHTML = "Please enter both names!";
+                return;
+            }
+
+             // Check if inputs contain only letters
+            const lettersOnly = /^[a-zA-Z\s]+$/;
+            if (!lettersOnly.test(user1) || !lettersOnly.test(user2)) {
+                document.getElementById("result").innerHTML = "Please enter names using letters only.";
+                return;
+            }
+
+            let result = Math.floor(Math.random() * 101);
+            document.getElementById("result").innerHTML = "The affinity between " + user1 + " and " + user2 + " is: " + result + "%";
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                calculateAffinity();
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            background-image: linear-gradient(135deg, #a855f7, #6366f1); /* Gradient background */
+            background-size: cover;
+            animation: fadeInBackground 2s ease forwards;
+        }
+
+        @keyframes fadeInBackground {
+            from {
+                background-color: rgba(247, 250, 252, 0);
+            }
+            to {
+                background-color: #f4f4f4;
+            }
+        }
+
+        div {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            text-align: center;
+            width: 80%;
+            max-width: 400px; /* Increased max-width for larger screens */
+            animation: fadeIn 1s ease forwards, pulse 2s infinite alternate;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Add a border */
+
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to{
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.04); /* Reduced pulse scale */
+            }
+        }
+
+        h1 {
+            color: #a855f7; /* Vibrant purple */
+            margin-bottom: 25px;
+            font-size: 28px; /* Slightly larger heading */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 12px 15px; /* Slightly increased padding */
+            margin: 10px 0;
+            width: 90%; /* Increased width of input */
+            border: 1px solid #e0e0e0;
+            border-radius: 6px; /* Slightly more rounded corners */
+            box-sizing: border-box;
+            font-size: 16px; /* Increased font size */
+            transition: border-color 0.3s ease; /* Smooth transition */
+        }
+
+        input:focus {
+            border-color: #a855f7; /* Highlight on focus */
+            outline: none; /* Remove default outline */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on focus */
+        }
+
+        button {
+            background-color: #a855f7; /* Purple button */
+            color: white;
+            padding: 12px 25px; /* Slightly increased padding */
+            border: none;
+            border-radius: 6px; /* More rounded corners */
+            cursor: pointer;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+            margin-top: 15px;
+            width: 90%; /* Make button wider */
+        }
+
+        button:hover {
+            background-color: #7e22ce; /* Darker purple on hover */
+            transform: scale(1.06); /* Subtler scale on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increased shadow on hover*/
+        }
+
+        button:active {
+            background-color: #5b21b6; /* Even darker purple on active */
+            transform: scale(1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow on active */
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 20px; /* Increased font size */
+            color: #6b7280;
+            font-weight: 500; /* Medium font weight */
+            letter-spacing: 0.5px;
+            animation: fadeInText 1s ease forwards, slideIn 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+       @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from{
+                transform: translateY(20px);
+            }
+            to {
+                transform: translateY(0px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            div {
+                width: 95%;
+                padding: 20px;
+            }
+            input {
+                width: 100%;
+                font-size: 14px;
+                padding: 10px;
+            }
+            button {
+                width: 100%;
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            h1{
+                font-size: 24px;
+            }
+            #result{
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Affinity Calculator</h1>
+        <input type="text" id="user1" placeholder="Your Name" onkeydown="handleKeyDown(event)">
+        <input type="text" id="user2" placeholder="His/Her Name" onkeydown="handleKeyDown(event)">
+        <button onclick="calculateAffinity()">Calculate</button>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
